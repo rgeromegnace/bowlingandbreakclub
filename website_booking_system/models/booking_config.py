@@ -34,21 +34,19 @@ Days = [
 
 class BookingPlan(models.Model):
     _name = "booking.plan"
+    _description = "Booking Plan"
 
     name = fields.Char(string="Name", required=True)
     discription = fields.Html(string="Description", help="Booking plan description.")
     sequence = fields.Integer(help="Determine the display order", default=1)
 
-    def _check_unique_insesitive(self, context=None):
-        recs = self.search_count([('name', '=ilike', self.name)])
-        if recs > 1:
-            return False
-        return True
-
-    _constraints = [(_check_unique_insesitive, _('This booking plan is already exist!'), ['name'])]
+    _sql_constraints = [
+        ('booking_plan_uniq', 'unique(name)', _('This booking plan is already exist!'))
+    ]
 
 class BookingTimeSlot(models.Model):
     _name = "booking.time.slot"
+    _description = "Booking Time Slot"
 
     sequence = fields.Integer(help="Determine the display order", default=1)
     start_time = fields.Float(string="Start Time", required=True, help="Enter slot start time.")
@@ -123,6 +121,7 @@ class BookingTimeSlot(models.Model):
 
 class BookingSlotConfig(models.Model):
     _name = "day.slot.config"
+    _description = "Day Slot Configuration"
 
     name = fields.Selection(selection=Days, string="Day", required=True)
     booking_status = fields.Selection(selection=[('open','Open'),('closed','Closed')], string="Status(Closed/Open)", required=True, help="Select booking status for the day(Closed/Open).", default="open")
@@ -136,6 +135,7 @@ class BookingSlotConfig(models.Model):
 
 class BookingSlot(models.Model):
     _name = "booking.slot"
+    _description = "Booking Slot"
 
     time_slot_id = fields.Many2one("booking.time.slot", required=True, string="Time Slot")
     plan_id = fields.Many2one("booking.plan", required=True, string="Booking Plan")
@@ -185,6 +185,7 @@ class BookingSlot(models.Model):
 
 class BookingConfig(models.Model):
     _name = "booking.config"
+    _description = "Booking Configuration"
 
     day = fields.Selection(selection=Days, string="Day")
     start_time = fields.Float("Start Time")

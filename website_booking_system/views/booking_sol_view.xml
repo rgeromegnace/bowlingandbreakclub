@@ -104,7 +104,7 @@
                     <field name="booked_plan_id"/>
                     <field name="booking_date"/>
                     <field name="product_uom_qty" string="Qty"/>
-                    <field name="product_uom" string="Unit of Measure" groups="product.group_uom"/>
+                    <field name="product_uom" string="Unit of Measure" groups="uom.group_uom"/>
                     <field name="price_subtotal" sum="Total"/>
                 </tree>
             </field>

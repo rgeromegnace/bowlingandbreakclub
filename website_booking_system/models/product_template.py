@@ -138,8 +138,8 @@ class SaleOrderLine(models.Model):
     @api.onchange('booking_slot_id','product_uom_qty')
     def onchange_quantity_available(self):
         for rec in self :
-            if not rec.booking_date or not rec.product_id:
-                raise UserError(_('Please first select the product and booking date then proceed further.'))
+            # if not rec.booking_date or not rec.product_id:
+            #     raise UserError(_('Please first select the product and booking date then proceed further.'))
             if rec.product_uom_qty and rec.booking_slot_id:
                 avl_qty = rec.product_id.product_tmpl_id.get_bk_slot_available_qty(rec.booking_date, rec.booking_slot_id.id)
                 if avl_qty < 1:

@@ -78,7 +78,7 @@
                 <attribute name="t-if">not bk_product_temp.is_booking_type</attribute>
             </xpath>
             <!-- Add readonly quantity column in cart row in case of booking product and also add sold out condition in cart line with delete button  -->
-            <xpath expr="//table//tbody//td[@class='text-center td-qty']" position="after">
+            <xpath expr="//table//tbody//td[hasclass('text-center','td-qty')]" position="after">
                 <td t-if="bk_product_temp.is_booking_type" class="text-center td-qty" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id">
                     <div class="css_quantity input-group mx-auto oe_website_spinner">
                         <div class="input-group-prepend">
@@ -104,7 +104,7 @@
                 </td>
             </xpath>
             <!-- Hide base quantity column in case of booking product in cart line -->
-            <xpath expr="//table//tbody//td[@class='text-center td-qty']" position="attributes">
+            <xpath expr="//table//tbody//td[hasclass('text-center','td-qty')]" position="attributes">
                 <attribute name="t-if">not bk_product_temp.is_booking_type</attribute>
             </xpath>
         </template>

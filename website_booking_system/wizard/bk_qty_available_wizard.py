@@ -33,6 +33,7 @@ Days = {
 
 class BookingQuantity(models.TransientModel):
     _name="booking.quantity.wizard"
+    _description = "Booking Quality Wizard"
 
     @api.model
     def default_get(self,default_fields):
