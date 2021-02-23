@@ -38,9 +38,10 @@ class WebsiteSale(WebsiteSale):
 
     @http.route(['/shop/cart/update'], type='http', auth="public", methods=['POST'], website=True, csrf=False)
     def cart_update(self, product_id, add_qty=1, set_qty=0, **kw):
-        res = super(WebsiteSale, self).cart_update(product_id, add_qty, set_qty)
+        res = super(WebsiteSale, self).cart_update(product_id, add_qty, set_qty, **kw)
         bk_plan = kw.get('bk_plan', False)
         bk_date = kw.get('bk_date', False)
+
         if bk_plan:
             bk_slot_obj = request.env["booking.slot"].browse([int(bk_plan)])
             sale_order = request.website.sale_get_order()

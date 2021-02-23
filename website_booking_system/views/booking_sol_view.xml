@@ -217,7 +217,7 @@
             <field name="name">Booking Orders Analysis</field>
             <field name="res_model">sale.order.line</field>
             <field name="view_mode">pivot,graph</field>
-            <field name="domain">[("product_id.is_booking_type","=",True)]</field>
+            <field name="domain">[("product_id.is_booking_type","=",True),('state','in',['sale','done'])]</field>
             <field name="context">{'search_default_group_product':1,'search_default_group_booking_date':2}</field>
             <field name="view_id" ref="website_booking_system.wk_booking_analysis_pivot_view"/>
         </record>

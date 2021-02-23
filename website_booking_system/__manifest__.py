@@ -17,7 +17,7 @@
   "name"                 :  "Odoo Booking & Reservation Management",
   "summary"              :  """Booking & reservation management in Odoo allows users to take appointment and ticket booking facility in Odoo website.""",
   "category"             :  "Website",
-  "version"              :  "1.0.0",
+  "version"              :  "1.0.2",
   "sequence"             :  1,
   "author"               :  "Webkul Software Pvt. Ltd.",
   "license"              :  "Other proprietary",
@@ -38,7 +38,7 @@
         Booking
         Reservation
         Booking and reservation""",
-  "live_test_url"        :  "http://odoodemo.webkul.com/?module=website_booking_system",
+  "live_test_url"        :  "http://odoodemo.webkul.com/?module=website_booking_system&custom_url=/shop",
   "depends"              :  ['website_sale'],
   "data"                 :  [
                              'security/ir.model.access.csv',
@@ -54,7 +54,7 @@
   "application"          :  True,
   "installable"          :  True,
   "auto_install"         :  False,
-  "price"                :  119,
-  "currency"             :  "EUR",
+  "price"                :  149,
+  "currency"             :  "USD",
   "pre_init_hook"        :  "pre_init_check",
 }

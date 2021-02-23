@@ -134,17 +134,6 @@ class BookingSlotConfig(models.Model):
         ('booking_day_uniq', 'unique(name, product_id)', _("Record already exist, you can't create multiple records for the same day."))
     ]
 
-    @api.onchange('booking_slots_ids')
-    def validate_slot_plan(self):
-        if self.booking_slots_ids:
-            saved_data = self.env["booking.slot"].browse(self.booking_slots_ids.ids);
-            new_data = self.booking_slots_ids - saved_data
-            for rec in new_data:
-                if rec.time_slot_id and rec.plan_id:
-                    x = saved_data.filtered(lambda l: l.time_slot_id == rec.time_slot_id and l.plan_id == rec.plan_id)
-                    if len(x) > 0:
-                        raise UserError(_("Record already exist with same time slot and plan."))
-
 class BookingSlot(models.Model):
     _name = "booking.slot"
 
@@ -154,6 +143,15 @@ class BookingSlot(models.Model):
     price = fields.Float(string="Price", required=True)
     slot_config_id = fields.Many2one("day.slot.config", string="Day Slot Config")
     line_ids = fields.One2many("sale.order.line", "booking_slot_id", string="Booking Orders")
+
+    @api.model
+    def create(self,vals):
+        time_slot = vals.get('time_slot_id')
+        plan_id = vals.get('plan_id')
+        saved_data = self.env['booking.slot'].search([('slot_config_id','=',vals.get('slot_config_id')),('time_slot_id','=',time_slot),('plan_id','=',plan_id)])
+        if len(saved_data)>0:
+            raise UserError(_('Record already exist for the selected booking slot & plan.'))
+        return super(BookingSlot,self).create(vals)
 
     def name_get(self):
         result = []
@@ -169,7 +167,21 @@ class BookingSlot(models.Model):
                 return False
             return True
 
-    _constraints = [(_check_unique_slot_plan, _('This booking slot is already exist.'), ['time_slot_id', 'plan_id', 'slot_config_id'])]
+    # SQL Constraints
+    _sql_constraints = [
+        ('_check_unique_slot_plan', 'unique(time_slot_id, plan_id, slot_config_id)', _("This booking slot is already exist."))
+    ]
+
+    @api.onchange('time_slot_id','plan_id')
+    def validate_slot_plan(self):
+        for rec in self:
+            if rec.time_slot_id and rec.plan_id:
+                unique_records = rec.slot_config_id.booking_slots_ids
+                if not rec._origin:
+                    unique_records = unique_records - rec
+                cur_rec = unique_records.filtered(lambda o:o.time_slot_id.id == rec.time_slot_id.id and o.plan_id.id == rec.plan_id.id)
+                if len(cur_rec) > 1:
+                    raise UserError(_("Record already exist with same time slot and plan."))
 
 class BookingConfig(models.Model):
     _name = "booking.config"

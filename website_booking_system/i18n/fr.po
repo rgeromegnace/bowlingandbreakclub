@@ -18,58 +18,71 @@ msgstr ""
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_and_reservation_modal_temp
 msgid "(Maximum capacity is"
-msgstr "Nombre maximum est"
+msgstr "(Nombre maximum est"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_product_cart_template
 msgid "<i class=\"fa fa-exclamation-triangle\"/> Sold Out"
-msgstr "Complet"
+msgstr "<i class=\"fa fa-exclamation-triangle\"/> Complet"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_and_reservation_modal_temp
 msgid "<span class=\"btn btn-primary btn-lg bk_model_booking bk-submit\">Book Now</span>"
-msgstr "Réserver"
+msgstr "<span class=\"btn btn-primary btn-lg bk_model_booking bk-submit\">Réserver</span>"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_and_reservation_modal_temp
 msgid "<span class=\"pull-left d-none d-sm-block\" style=\"font-size: 16px;font-weight: bold;\">\n"
 "                                        Select Slot:\n"
 "                                    </span>"
-msgstr "Choix du jour"
+msgstr "<span class=\"pull-left d-none d-sm-block\" style=\"font-size: 16px;font-weight: bold;\">\n"
+"                                        Choix du jour:\n"
+"                                    </span>"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_and_reservation_modal_temp
 msgid "<span class=\"pull-left\" style=\"font-size: 16px;font-weight: bold;\">\n"
 "                                        Select Slot:\n"
 "                                    </span>"
-msgstr "Choix"
+msgstr "<span class=\"pull-left\" style=\"font-size: 16px;font-weight: bold;\">\n"
+"                                        Choix du jour:\n"
+"                                    </span>"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_sel_plans
 msgid "<span class=\"pull-left\" style=\"font-size: 16px;margin-top: 22px;font-weight: bold;\">\n"
 "                    Select Plan:\n"
 "                </span>"
-msgstr "Formule"
+msgstr "<span class=\"pull-left\" style=\"font-size: 16px;margin-top: 22px;font-weight: bold;\">\n"
+"                    Formule:\n"
+"                </span>"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_and_reservation_modal_temp
 msgid "<span style=\"font-size: 16px;font-weight: 700;\">Guest</span>"
-msgstr "Personnes"
+msgstr "<span style=\"font-size: 16px;font-weight: 700;\">Personnes</span>"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_product_cart_template
 msgid "<span> | Slot: </span>"
+msgstr "<span> | fente: </span>"
+
+#. module: website_booking_system
+#: model_terms:ir.ui.view,arch_db:website_booking_system.booking_modal_bk_day_slots
+msgid ""
+"<span>No slots availble on the selected date, please choose a different "
+"date.</span>"
 msgstr ""
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_product_price_template
 msgid "<span>Price Onward </span>"
-msgstr "Prix à partir de"
+msgstr "<span>Prix à partir de </span>"
 
 #. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_and_reservation_modal_temp
 msgid "<span>Total: </span>"
-msgstr "Total"
+msgstr "<span>Total: </span>"
 
 #. module: website_booking_system
 #: model_terms:ir.actions.act_window,help:website_booking_system.wk_booking_product_template_action_website
@@ -113,6 +126,13 @@ msgid "Available for booking"
 msgstr "Disponible à la réservation"
 
 #. module: website_booking_system
+#: code:addons/website_booking_system/models/product_template.py:0
+#: code:addons/website_booking_system/models/product_template.py:0
+#, python-format
+msgid "Available quantity on %s for %s(%s) is %s"
+msgstr ""
+
+#. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_and_reservation_modal_temp
 msgid "BOOK YOUR SLOT"
 msgstr "Réservez votre place"
@@ -123,16 +143,49 @@ msgid "Book Now"
 msgstr "Réserver"
 
 #. module: website_booking_system
+#: model:ir.model.fields,field_description:website_booking_system.field_sale_order_line__booked_plan_id
+msgid "Booked Plan"
+msgstr ""
+
+#. module: website_booking_system
+#: model:ir.model.fields,field_description:website_booking_system.field_sale_order_line__booked_slot_id
+msgid "Booked Slot"
+msgstr ""
+
+#. module: website_booking_system
 #: model:ir.ui.menu,name:website_booking_system.wk_booking_menu_root
 #: model_terms:ir.ui.view,arch_db:website_booking_system.inherit_product_template_booking_form_view
 msgid "Booking & Reservation"
 msgstr "Réservation"
 
 #. module: website_booking_system
+#: model:ir.ui.menu,name:website_booking_system.wk_booking_analysis_menu
+msgid "Booking Analysis"
+msgstr ""
+
+#. module: website_booking_system
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_product_order_line_calendar_view
+msgid "Booking Calendar"
+msgstr ""
+
+#. module: website_booking_system
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_quantity_wizard__bk_date
 #: model:ir.model.fields,field_description:website_booking_system.field_sale_order_line__booking_date
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_order_line_filter_view
 msgid "Booking Date"
 msgstr "Date de réservation"
+
+#. module: website_booking_system
+#: code:addons/website_booking_system/models/product_template.py:0
+#, python-format
+msgid "Booking Date Should be between %s and %s"
+msgstr ""
+
+#. module: website_booking_system
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_order_form
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_product_order_line_form_view
+msgid "Booking Details"
+msgstr ""
 
 #. module: website_booking_system
 #: model:ir.model.fields,field_description:website_booking_system.field_sale_order__is_booking_type
@@ -151,8 +204,24 @@ msgid "Booking Orders"
 msgstr "Réservation de commandes"
 
 #. module: website_booking_system
+#: model:ir.actions.act_window,name:website_booking_system.wk_booking_analysis_action
+msgid "Booking Orders Analysis"
+msgstr ""
+
+#. module: website_booking_system
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_analysis_graph_view
+msgid "Booking Orders Graph View"
+msgstr ""
+
+#. module: website_booking_system
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_analysis_pivot_view
+msgid "Booking Orders Pivot View"
+msgstr ""
+
+#. module: website_booking_system
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_quantity_wizard__plan_id
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_slot__plan_id
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_order_line_filter_view
 msgid "Booking Plan"
 msgstr "Formule de réservation"
 
@@ -176,6 +245,7 @@ msgstr "Produits de réservation"
 #. module: website_booking_system
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_quantity_wizard__booking_slot_id
 #: model:ir.model.fields,field_description:website_booking_system.field_sale_order_line__booking_slot_id
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_order_line_filter_view
 msgid "Booking Slot"
 msgstr "Emplacement de réservation"
 
@@ -190,6 +260,12 @@ msgstr "Emplacements de réservation"
 #: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_time_slot_tree_view
 msgid "Booking Time Slots"
 msgstr "Horaires de réservation"
+
+#. module: website_booking_system
+#: code:addons/website_booking_system/models/product_template.py:0
+#, python-format
+msgid "Booking is closed on this day, please select a different date."
+msgstr ""
 
 #. module: website_booking_system
 #: model:ir.model.fields,help:website_booking_system.field_booking_plan__discription
@@ -283,6 +359,7 @@ msgstr "Configuration jour emplacement"
 
 #. module: website_booking_system
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_plan__discription
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_product_order_line_form_view
 msgid "Description"
 msgstr "Description"
 
@@ -388,6 +465,14 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: website_booking_system
+#: code:addons/website_booking_system/models/product_template.py:0
+#: code:addons/website_booking_system/models/product_template.py:0
+#, python-format
+msgid ""
+"No quantity available for the selected slot, please select a different slot."
+msgstr ""
+
+#. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_available_quantity_wizard_form_view
 msgid "Ok"
 msgstr "Ok"
@@ -412,6 +497,11 @@ msgstr "Etat de la commande"
 #: model:ir.ui.menu,name:website_booking_system.wk_booking_orders_menu
 msgid "Orders"
 msgstr "Commandes"
+
+#. module: website_booking_system
+#: model:ir.model.fields,field_description:website_booking_system.field_sale_order__payment_start_date
+msgid "Payment initiated time"
+msgstr ""
 
 #. module: website_booking_system
 #: model:ir.ui.menu,name:website_booking_system.booking_plan_menu
@@ -497,7 +587,7 @@ msgstr "Quantité"
 #: code:addons/website_booking_system/models/booking_config.py:151
 #, python-format
 msgid "Record already exist with same time slot and plan."
-msgstr ""
+msgstr "L'enregistrement existe déjà avec le même créneau horaire et le même plan."
 
 #. module: website_booking_system
 #: code:addons/website_booking_system/models/booking_config.py:111
@@ -521,6 +611,11 @@ msgstr "Supprimer du panier"
 #: model_terms:ir.ui.view,arch_db:website_booking_system.booking_product_cart_template
 msgid "Remove one"
 msgstr "Supprimer"
+
+#. module: website_booking_system
+#: model:ir.ui.menu,name:website_booking_system.wk_booking_orders_reporting_main_menu
+msgid "Reporting"
+msgstr ""
 
 #. module: website_booking_system
 #: model:ir.model,name:website_booking_system.model_sale_order
@@ -555,10 +650,21 @@ msgid "Select booking status for the day(Closed/Open)."
 msgstr "Sélectionnez le statut de réservation pour la journée (fermé/ouvert)."
 
 #. module: website_booking_system
+#: code:addons/website_booking_system/wizard/bk_qty_available_wizard.py:0
+#, python-format
+msgid "Selected Date is beyond the configured start and end date."
+msgstr ""
+
+#. module: website_booking_system
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_plan__sequence
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_time_slot__sequence
 msgid "Sequence"
 msgstr "Séquence"
+
+#. module: website_booking_system
+#: model_terms:ir.ui.view,arch_db:website_booking_system.booking_products_add_to_cart
+msgid "Shopping cart"
+msgstr ""
 
 #. module: website_booking_system
 #: model:ir.model.fields,field_description:website_booking_system.field_booking_config__time_slot
@@ -596,7 +702,7 @@ msgstr "Dimanche"
 #. module: website_booking_system
 #: model_terms:ir.actions.act_window,help:website_booking_system.wk_booking_orders_action
 msgid "There is no booking order from the website"
-msgstr ""
+msgstr "Il n'y a pas d'ordre de réservation sur le site"
 
 #. module: website_booking_system
 #: model_terms:ir.actions.act_window,help:website_booking_system.wk_booking_order_lines_action
@@ -608,7 +714,7 @@ msgstr "Il n'y a pas d'ordre de réservation sur le site"
 #: constraint:booking.plan:0
 #, python-format
 msgid "This booking plan is already exist!"
-msgstr ""
+msgstr "Ce plan de réservation existe déjà!"
 
 #. module: website_booking_system
 #: code:addons/website_booking_system/models/booking_config.py:178
@@ -638,6 +744,11 @@ msgid "Time Slot"
 msgstr "Créneau horaire"
 
 #. module: website_booking_system
+#: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_order_line_filter_view
+msgid "Today"
+msgstr ""
+
+#. module: website_booking_system
 #: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_product_order_line_tree_view
 msgid "Total"
 msgstr "Total"
@@ -652,6 +763,13 @@ msgstr "Mardi"
 #: model_terms:ir.ui.view,arch_db:website_booking_system.wk_booking_product_order_line_tree_view
 msgid "Unit of Measure"
 msgstr "Unité de mesure"
+
+#. module: website_booking_system
+#: model:ir.actions.server,name:website_booking_system.unreserve_booking_product_qty_ir_actions_server
+#: model:ir.cron,cron_name:website_booking_system.unreserve_booking_product_qty
+#: model:ir.cron,name:website_booking_system.unreserve_booking_product_qty
+msgid "Unreserve Booking Product Quantities From Cart"
+msgstr ""
 
 #. module: website_booking_system
 #: model:ir.model,name:website_booking_system.model_website
@@ -693,4 +811,3 @@ msgstr ""
 #: model:ir.model,name:website_booking_system.model_day_slot_config
 msgid "day.slot.config"
 msgstr ""
-

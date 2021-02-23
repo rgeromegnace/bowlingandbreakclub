@@ -94,15 +94,12 @@ class SaleOrderLine(models.Model):
 
     @api.model
     def create(self, vals):
-        _logger.info("~~~1~~~~~create~~~~~~~~~~~%r~~~~~~~~~~~~",vals)
         res = super(SaleOrderLine, self).create(vals)
         res.compute_booking_line_name()
         return res
 
     def write(self, vals):
-        _logger.info("~~~1~~~~~booking_date~~~~~~~~~~~%r~~~~~~~~~~~~",vals)
         res = super(SaleOrderLine, self).write(vals)
-        _logger.info("~~~~2~~~~booking_date~~~~~~~~~~~%r~~~~~~~~~~~~",vals.get('booking_date'))
         if vals.get('booking_date') or vals.get('booking_slot_id') or vals.get('product_id'):
             self.compute_booking_line_name()
         return res
@@ -112,6 +109,46 @@ class SaleOrderLine(models.Model):
         for rec in self:
             rec.compute_booking_line_name()
         return
+
+    @api.onchange('booking_date')
+    def is_booking_date_valid(self):
+        for rec in self:
+            if rec.booking_date:
+                if not rec.product_id:
+                    raise UserError(_('Please first select the product and proceed further.'))
+                if not (rec.booking_date>=rec.product_id.br_start_date and rec.booking_date<=rec.product_id.br_end_date):
+                    rec.booking_date = None
+                    raise UserError(_('Booking Date Should be between %s and %s'%(rec.product_id.br_start_date,rec.product_id.br_end_date)))
+                day = rec.booking_date.weekday()
+                day_valid = rec.product_id.booking_day_slot_ids.filtered(lambda o:o.name==Days[int(day)] and o.booking_status=='open')
+                if len(day_valid)==0:
+                    raise UserError(_('Booking is closed on this day, please select a different date.'))
+                if rec.product_uom_qty and rec.booking_slot_id:
+                    avl_qty = rec.product_id.product_tmpl_id.get_bk_slot_available_qty(rec.booking_date, rec.booking_slot_id.id)
+                    if avl_qty < 1:
+                        rec.booking_slot_id = None
+                        raise UserError(_("No quantity available for the selected slot, please select a different slot."))
+                    if rec.product_uom_qty > avl_qty:
+                        raise UserError(_('Available quantity on %s for %s(%s) is %s' % (rec.booking_date, rec.booking_slot_id.time_slot_id.name_get()[0][1], rec.booking_slot_id.plan_id.name, avl_qty)))
+                domain = [('slot_config_id','=',day_valid.id )]
+                return {
+                    'domain' : {'booking_slot_id' : domain}
+                }
+
+    @api.onchange('booking_slot_id','product_uom_qty')
+    def onchange_quantity_available(self):
+        for rec in self :
+            if not rec.booking_date or not rec.product_id:
+                raise UserError(_('Please first select the product and booking date then proceed further.'))
+            if rec.product_uom_qty and rec.booking_slot_id:
+                avl_qty = rec.product_id.product_tmpl_id.get_bk_slot_available_qty(rec.booking_date, rec.booking_slot_id.id)
+                if avl_qty < 1:
+                    rec.booking_slot_id = None
+                    raise UserError(_("No quantity available for the selected slot, please select a different slot."))
+                if rec.product_uom_qty > avl_qty:
+                    raise UserError(_('Available quantity on %s for %s(%s) is %s' % (rec.booking_date, rec.booking_slot_id.time_slot_id.name_get()[0][1], rec.booking_slot_id.plan_id.name, avl_qty)))
+            if rec.booking_slot_id:
+                rec.price_unit = rec.booking_slot_id.price
 
     def _get_display_price(self, product):
         for rec in self:
@@ -156,7 +193,6 @@ class ProductTemplate(models.Model):
                 'type':'ir.actions.act_window',
                 'res_model':'booking.quantity.wizard',
                 'view_mode':'form',
-                # 'view_type':'form',
                 'view_id':rec.env.ref('website_booking_system.booking_available_quantity_wizard_form_view').id,
                 'context' : context,
                 'target':'new',

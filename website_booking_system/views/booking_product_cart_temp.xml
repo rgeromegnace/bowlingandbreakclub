@@ -23,7 +23,7 @@
 
         <!-- Hide product quantity on product page in case of booking product -->
         <template id="booking_product_quantity_template" inherit_id="website_sale.product_quantity">
-            <xpath expr="//div[hasclass('css_quantity', 'input-group')]" position="attributes">
+            <xpath expr="//div[@id='product_details']/form/div[hasclass('js_product')]/div[hasclass('css_quantity','input-group')]" position="attributes">
                 <attribute name="t-if">not product.is_booking_type</attribute>
             </xpath>
         </template>
@@ -40,11 +40,13 @@
 
         <!-- Update Add to cart button of Product list view and grid view page: redirect to product page in case of booking product -->
         <template id="booking_products_add_to_cart" inherit_id="website_sale.products_add_to_cart">
-            <xpath expr="//div[hasclass('product_price')]/t[1]" position="attributes">
-                <attribute name="t-if">len(product.product_variant_ids) == 1 and not product.is_booking_type</attribute>
+            <xpath expr="//div[hasclass('o_wsale_product_btn')]/t[@t-if='product_variant_id']" position="after">
+                <a t-if="product.is_booking_type" class="btn btn-secondary" t-att-href="keep('/shop/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" aria-label="Shopping cart" title="Shopping cart">
+                    <span class="fa fa-shopping-cart" />
+                </a>
             </xpath>
-            <xpath expr="//div[hasclass('product_price')]/t[2]" position="attributes">
-                <attribute name="t-if">len(product.product_variant_ids) &gt; 1 or product.is_booking_type</attribute>
+            <xpath expr="//div[hasclass('o_wsale_product_btn')]/t[@t-if='product_variant_id']" position="attributes">
+                <attribute name="t-if">product_variant_id and not product.is_booking_type</attribute>
             </xpath>
         </template>
 
