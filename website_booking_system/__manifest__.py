@@ -37,7 +37,7 @@
         Reservation management in Odoo
         Booking
         Reservation
-        Booking and reservation""",
+        Booking and reservation """,
   "live_test_url"        :  "http://odoodemo.webkul.com/?module=website_booking_system&custom_url=/shop",
   "depends"              :  ['website_sale'],
   "data"                 :  [
